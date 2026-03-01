@@ -1,13 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "person-service-rust-develop" . }}
+  # Change this back to the original helper name
+  name: {{ include "person-service-rust.fullname" . }} 
 spec:
   type: ClusterIP
   ports:
-    - port: 80          # The "Entry Door" of the Service
-      targetPort: 3000  # The "Exit Door" (Must match your Rust code!)
+    - port: 80
+      targetPort: 3000
       protocol: TCP
       name: http
   selector:
-    {{- include "person-service-rust-develop.selectorLabels" . | nindent 4 }}
+    # Change this back too
+    {{- include "person-service-rust.selectorLabels" . | nindent 4 }}
