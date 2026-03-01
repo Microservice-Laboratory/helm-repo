@@ -34,6 +34,12 @@ spec:
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: person-service-secrets
+                  key: DATABASE_URL
           {{- with .Values.securityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}
