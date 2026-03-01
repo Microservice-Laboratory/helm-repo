@@ -24,6 +24,11 @@ spec:
         app: postgres
     spec:
       containers:
+        - name: {{ .Chart.Name }}
+          ports:
+            - name: http
+              containerPort: 3000 # Must match the Rust bind port
+              protocol: TCP
         - name: postgres
           image: postgres:18
           env:
