@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ include "person-service-rust.fullname" . }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       {{- include "person-service-rust.selectorLabels" . | nindent 6 }}
