@@ -12,6 +12,10 @@ spec:
       labels:
         {{- include "person-service-rust.selectorLabels" . | nindent 8 }}
     spec:
+      initContainers:
+      - name: wait-for-postgres
+        image: busybox:1.28
+        command: ['sh', '-c', "until nc -zv postgres-service 5432; do echo waiting for postgres; sleep 2; done"]
       containers:
         - name: {{ .Chart.Name }}
           # Ensure your values.yaml has image.repository and image.tag defined
