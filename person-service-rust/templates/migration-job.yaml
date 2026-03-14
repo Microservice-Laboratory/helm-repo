@@ -12,7 +12,7 @@ spec:
       containers:
         - name: migrate
           image: {{ .Values.migrationImage.repository }}:{{ .Values.migrationImage.tag }}
-          command: ["sqlx", "migrate", "run"]
+          command: ["/usr/local/bin/sqlx", "migrate", "run"]
           env:
             - name: DATABASE_URL
               valueFrom:
